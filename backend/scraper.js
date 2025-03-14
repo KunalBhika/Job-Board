@@ -25,6 +25,8 @@ const scrapeJobs = async (keyword) => {
     });
 
     await browser.close();
+
+    return jobs;
 }
 
 export default scrapeJobs;
