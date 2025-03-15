@@ -20,6 +20,7 @@ const scrapeJobs = async (keyword) => {
                 company_name : job.querySelector(".comp-name")?.innerText.trim() || "N/A" ,
                 experience : job.querySelector(".expwdth")?.innerText.trim() || "N/A" ,
                 apply_link : job.querySelector(".comp-name")?.getAttribute("href") || "N/A" ,
+                logo_url : job.querySelector(".logoImage")?.getAttribute("src") || "N/A" ,
             })
         )
     });

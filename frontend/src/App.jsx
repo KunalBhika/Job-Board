@@ -1,35 +1,88 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import { Search } from "lucide-react";
+import axios from "axios";
+import Card from "./components/card";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const displayNumber = 4;
+  const [jobs, setJobs] = useState(null);
+  const [page, setPage] = useState(0);
+  const [designation, setDesignation] = useState("Software Engineer");
+
+  const fetchJobs = async () => {
+    setJobs(null);   // resetting
+    setPage(0)
+    try {
+      const response = await axios.get(
+        `/api/findJobs?title=${designation}`  // `http://localhost:5000/api/findJobs?title=${designation}`
+      );
+      if (response.data.type === "success") {
+        setJobs(response.data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchJobs();
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="container p-10 flex flex-col justify-center items-center gap-2">
+        <fieldset className="fieldset w-xs bg-base-200 border border-base-300 p-4 rounded-box">
+          <legend className="fieldset-legend">Enter designation</legend>
+          <div className="join">
+            <input
+              type="text"
+              className="input join-item"
+              placeholder="Eg. Software Engineer"
+              onChange={(e) => {
+                setDesignation(e.target.value);
+              }}
+            />
+            <button className="btn join-item" onClick={fetchJobs}>
+              <Search size={16} />
+            </button>
+          </div>
+        </fieldset>
+        {jobs === null ? (
+          <span className="loading loading-dots loading-xl"></span>
+        ) : (
+          jobs
+            .slice(
+              page * displayNumber,
+              page * displayNumber + displayNumber >= jobs.length
+                ? jobs.length - 1
+                : page * displayNumber + displayNumber
+            )
+            .map((jobDetails, index) => (
+              <Card key={index} jobData={jobDetails} />
+            ))
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+      <div className="flex flex-row justify-center item-center gap-4">
+        {Array.from({ length: jobs?.length / displayNumber - 1 }).map(
+          (_, index) => (
+            <button
+              className={`btn btn-active ${
+                page === index ? "btn-primary" : ""
+              }`}
+              key={index}
+              onClick={() => {
+                setPage(index);
+              }}
+            >
+              0{index + 1}
+            </button>
+          )
+        )}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

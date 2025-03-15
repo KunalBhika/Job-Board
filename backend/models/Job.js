@@ -5,6 +5,7 @@ const jobSchema = new mongoose.Schema({
     company_name : String ,
     experience : String ,
     apply_link : String ,
+    logo_url : String,
 } , { timestamps : true });
 
 const Job = mongoose.model("Job" , jobSchema);
