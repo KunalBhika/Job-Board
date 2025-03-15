@@ -15,7 +15,7 @@ function App() {
     setPage(0)
     try {
       const response = await axios.get(
-        `/api/findJobs?title=${designation}`  // `http://localhost:5000/api/findJobs?title=${designation}`
+        `http://localhost:5000/api/findJobs?title=${designation}`  // `http://localhost:5000/api/findJobs?title=${designation}`
       );
       if (response.data.type === "success") {
         setJobs(response.data.data);
