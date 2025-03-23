@@ -5,7 +5,7 @@ const scrapeJobs = async (keyword) => {
     // https://www.naukri.com/product-manager-jobs?k=product%20manager - sample link
     const url = `https://www.naukri.com/${encodeURIComponent(keyword)}-jobs?k=${encodeURIComponent(keyword)}`;
 
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
     
     await page.goto(url);
