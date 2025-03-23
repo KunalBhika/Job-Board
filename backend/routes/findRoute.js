@@ -19,7 +19,7 @@ router.get("/findJobs" , async (req , res) => {
         }
         else return res.status(200).json({ data : [] , type : 'success' , message : 'no jobs found' }); 
     } catch(error) {
-        return res.status(500).json({ error : 'internal server error' , type : 'error' });
+        return res.status(500).json({ error : 'internal server error' , type : 'errorll' });
     }
 });
 
