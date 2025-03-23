@@ -10,7 +10,7 @@ router.get("/findJobs" , async (req , res) => {
         const currentResults = await Job.find({ title : { $regex : title , $options : "i" } });
         if(currentResults.length > 0) return res.status(200).json({ data : currentResults , type : 'success' });
 
-        const searchResult = await scrapeJobs(title);
+        // const searchResult = await scrapeJobs(title);
 
         if(searchResult.length > 0) {
             await Job.deleteMany({});

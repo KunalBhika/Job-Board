@@ -8,7 +8,7 @@ function App() {
   const displayNumber = 4;
   const [jobs, setJobs] = useState(null);
   const [page, setPage] = useState(0);
-  const [designation, setDesignation] = useState("Product ma");
+  const [designation, setDesignation] = useState("Software Engineer");
 
   const fetchJobs = async () => {
     setJobs(null);   // resetting
