@@ -15,7 +15,7 @@ function App() {
     setPage(0)
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/findJobs?title=${designation}`  // `http://localhost:5000/api/findJobs?title=${designation}`
+        `https://job-board-0mwe.onrender.com/api/findJobs?title=${designation}`  // `http://localhost:5000/api/findJobs?title=${designation}`
       );
       if (response.data.type === "success") {
         setJobs(response.data.data);
