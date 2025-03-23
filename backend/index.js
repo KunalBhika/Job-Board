@@ -3,8 +3,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectToDB from "./db.js";
 import findRoute from "./routes/findRoute.js";
+import path from "path";
 
 const app = express();
+const _dirname = path.resolve();
 
 app.use(cors());
 app.use(express.json());
