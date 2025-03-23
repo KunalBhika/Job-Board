@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import axios from "axios";
-import Card from "./components/card.jsx";
+import Card from "./components/Card.jsx";
 import "./App.css";
 
 function App() {
